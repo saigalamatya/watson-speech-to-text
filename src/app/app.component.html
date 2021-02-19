@@ -1,0 +1,38 @@
+<button (click)="startStream()" *ngIf="!isRecording">Record</button>
+<button (click)="stopStream()" *ngIf="isRecording">Stop</button>
+
+<br />
+<form (ngSubmit)="uploadAudio($event)" #audioUploadForm="ngForm">
+  <input type="file" id="myFile" name="filename" (change)="fileInfo($event)">
+  <button type="submit">Upload</button>
+</form>
+
+<!-- Recorded audio -->
+<!-- <audio controls *ngIf="audioUrl">
+  <source [src]="audioUrl">
+  Your browser does not support the audio element.
+</audio> -->
+
+<br>
+<br>
+{{recordingLabel}}
+
+<audio controls="" *ngIf="audioUrl" id="source">
+  <source [src]="sanitize(audioUrl)" type="audio/wav">
+</audio>
+<br />
+<h3>{{ transcriptLabel }}</h3>
+<span *ngFor="let item of results">
+  <div>{{ item.alternatives[0].transcript}}</div>
+</span>
+
+
+<div id="waveform"></div>
+<div id="wave-timeline"></div>
+
+<canvas id="output" height="500" width="500"></canvas>
+<canvas id="audio_visual"></canvas>
+<canvas id="myCanvas"></canvas>
+
+<div id="waveform"></div>
+<div id="wave-timeline"></div>
